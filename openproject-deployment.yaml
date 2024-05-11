@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: openproject
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: openproject
+  template:
+    metadata:
+      labels:
+        app: openproject
+    spec:
+      containers:
+      - name: openproject
+        image: openproject/openproject:14
+        ports:
+        - containerPort: 80
+        env:
+        - name: OPENPROJECT_SECRET_KEY_BASE
+          value: "secret"
+        - name: OPENPROJECT_HOST__NAME
+          value: "localhost:8080"
+        - name: OPENPROJECT_HTTPS
+          value: "false"
+        - name: OPENPROJECT_DEFAULT__LANGUAGE
+          value: "en"
